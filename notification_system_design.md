@@ -254,3 +254,18 @@ solution - archiving old notifications to a separate table or database
 
 
 Stage 3 
+
+Query - Yes the query is correct because it fetched all unread notifications of a particular user and sorts them by timestamp in descending order
+
+Slow - large number of notifications and large number of users make the query slow without indexing the database scans millions of rows to find notifications
+
+Solution to make it faster - create an index on the columns used in filterting and sorting 
+
+Query to find students who recieved placement notifications in the last 7 days - 
+SELECT DISTINCT studentID
+FROM notifications
+WHERE notificationType = 'Placement'
+AND timestamp >= NOW() - INTERVAL 7 DAY;
+
+and to further improve it we can only fetch required columns instead of fetching all columns
+
