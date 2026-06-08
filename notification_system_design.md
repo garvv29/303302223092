@@ -22,31 +22,31 @@ BaseUrl - /api/notifications
         Response -
         {
             "success": true,
-            "count": 2,
+            "count": 3,
             "notifications": [
              {
-                "ID": "abcd1234",
-                "Type": "Placement",
-                "Title": "Google is Hiring",
-                "Message": "Google is looking for Software Engineers with 2+ years of experience",
+                "id": "abcd1234",
+                "type": "Placement",
+                "title": "Google is Hiring",
+                "message": "Google is looking for Software Engineers with 2+ years of experience",
                 "isRead": false,
-                Timestamp: "2026-08-06 00:00:00",
+                "timestamp": "2026-08-06 00:00:00",
              },
              {
-                "ID": "efgh5678",
-                "Type": "Result",
-                "Title": "6th Semester Results",
-                "Message": "6th Semester Results are out",
+                "id": "efgh5678",
+                "type": "Result",
+                "title": "6th Semester Results",
+                "message": "6th Semester Results are out",
                 "isRead": true,
-                Timestamp: "2026-10-06 10:00:00",
+                "timestamp": "2026-10-06 10:00:00",
              },
              {
-                "ID": "ijkl9123",
-                "Type": "Event",
-                "Title": "Freshers Party",
-                "Message": "Freshers Party on 10th June",
+                "id": "ijkl9123",
+                "type": "Event",
+                "title": "Freshers Party",
+                "message": "Freshers Party on 10th June",
                 "isRead": false,
-                Timestamp: "2026-08-06 10:00:00",
+                "timestamp": "2026-08-06 10:00:00",
              }
             ]
         } 
@@ -64,20 +64,20 @@ BaseUrl - /api/notifications
             "count": 2,
             "notifications": [
                 {
-                    "ID": "abcd1234",
-                    "Type": "Placement",
-                    "Title": "Google is Hiring",
-                    "Message": "Google is looking for Software Engineers with 2+ years of experience",
+                    "id": "abcd1234",
+                    "type": "Placement",
+                    "title": "Google is Hiring",
+                    "message": "Google is looking for Software Engineers with 2+ years of experience",
                     "isRead": false,
-                    Timestamp: "2026-08-06 00:00:00",
+                    "timestamp": "2026-08-06 00:00:00",
                 },
                 {
-                    "ID": "ijkl9123",
-                    "Type": "Event",
-                    "Title": "Freshers Party",
-                    "Message": "Freshers Party on 10th June",
+                    "id": "ijkl9123",
+                    "type": "Event",
+                    "title": "Freshers Party",
+                    "message": "Freshers Party on 10th June",
                     "isRead": false,
-                    Timestamp: "2026-08-06 10:00:00",
+                    "timestamp": "2026-08-06 10:00:00",
                 }
             ]
         }
@@ -96,7 +96,7 @@ BaseUrl - /api/notifications
         }
 
 4. Mark all notifications as Read -
-        Endpoint - PATCH /api/notifications/readall
+        Endpoint - PATCH /api/notifications/read-all
         Header - 
         { 
             Authorization: Bearer <token>,
@@ -118,20 +118,20 @@ BaseUrl - /api/notifications
         Request - 
         {
             "userId": "456",
-            "Type": "Placement",
-            "Title": "Microsoft is Hiring",
-            "Message": "Microsoft is looking for Software Engineers with 3+ years of experience"
+            "type": "Placement",
+            "title": "Microsoft is Hiring",
+            "message": "Microsoft is looking for Software Engineers with 3+ years of experience"
         }
         Response -
         {
             "success":true,
             "data": {
-                "ID": "456" ,
-                "Type": "Placement",
-                "Title": "Microsoft is Hiring",
-                "Message": "Microsoft is looking for Software Engineers with 3+ years of experience",
+                "id": "mnop4567" ,
+                "type": "Placement",
+                "title": "Microsoft is Hiring",
+                "message": "Microsoft is looking for Software Engineers with 3+ years of experience",
                 "isRead": false,
-                Timestamp: "2026-08-06 12:00:00",
+                "timestamp": "2026-08-06 12:00:00",
             }
         }
 
@@ -150,11 +150,33 @@ BaseUrl - /api/notifications
 
 Notification Json Schema - 
 {
-    "ID": "string",
+    "id": "string",
     "userId": "string",
-    "Type": "Placement | Event | Result",
-    "Title": "string",
-    "Message": "string",
+    "type": "Placement | Event | Result",
+    "title": "string",
+    "message": "string",
     "isRead": false,
-    Timestamp: "2026-08-06 00:00:00",
+    "timestamp": "2026-08-06 00:00:00",
+}
+
+7. Receive Real-Time Notifications
+
+Technology-
+Socket.IO (websockets)
+
+Event Name - notification
+
+Description -
+Whenever a new notification is created the server sends a
+notification event to the user.The client receives
+the notification instantly without refreshing the page.
+
+Sample Notification Event -
+{
+    "id": "mnop4567",
+    "type": "Placement",
+    "title": "Microsoft is Hiring",
+    "message": "Microsoft is looking for Software Engineers with 3+ years of experience",
+    "isRead": false,
+    "timestamp": "2026-08-06 12:00:00"
 }
