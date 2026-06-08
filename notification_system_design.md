@@ -298,3 +298,28 @@ Tradeoffs - users may need multiple request to view older notifications
 
 Stage 5
 
+The given code is very slow for 50000 students because eit does it one by one if one fails the loop will stop midway and some students might recieve notifications while others may not and it has no retry feature and email and db are happening together tehy should be done seperately 
+
+if it fails for 200 students - notifications should still be saved in database and failed notifications should be retried later failures should be logged
+
+fixes - use a queue based system , save to DB and email sending should be seperate modules so even if mail fails db has it 
+
+pseudocode - 
+
+function notify_all(student_ids, message):
+    for student_id in student_ids:
+        notification_id = save_to_db(
+            student_id,
+            message
+        )
+        queue.push({student_id,notification_id,message})
+
+Helper - 
+
+function notification_worker(job):
+    try:
+        send_email(job.student_id,job.message)
+        push_to_app(job.student_id,job.messag)
+        mark_job_completed(job)
+    catch error:
+        retry_job(job)
