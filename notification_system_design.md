@@ -269,3 +269,32 @@ AND timestamp >= NOW() - INTERVAL 7 DAY;
 
 and to further improve it we can only fetch required columns instead of fetching all columns
 
+
+
+Stage 4 
+
+Problem - notifications are fetched from the database every time a user loads a page with so many students using the application the database recieves a large number of repeated queries which increase database load and response time also reduce performance and give poor experience to users
+
+Solution 1 - Realtime Notifications 
+instead of fetching notifications every time from the database we could use Socket.IO where user connect to websocket after login and server pushes new notifications instantly , client updates notification list without quering the database repeatedly
+
+Tradeoffs - complex implmentation and the server will have to maintain active socket connections  
+
+Solution 2 - store frequently asked notifications in a cache such as Redis 
+
+With redis when user request notifications -> applications checks redis cache and if data exists in cached data return it , if not then fetch from database and also store it in cache for further requests
+
+This will improve the response time , reduce database load and improve performance
+
+Tradeoffs - additional infrastructure of redis and could give erros when notifications are updated so we need to handle those 
+
+Solution 3 - Pagination - load only a limited number of notifications 
+smaller queries , faster responses 
+
+Tradeoffs - users may need multiple request to view older notifications 
+
+
+
+
+Stage 5
+
