@@ -89,9 +89,6 @@ BaseUrl - /api/notifications
             Authorization: Bearer <token>,
             Content-Type: application/json
         }
-        Request - 
-        {
-        }
         Response -
         {
             "success":true,
@@ -99,14 +96,11 @@ BaseUrl - /api/notifications
         }
 
 4. Mark all notifications as Read -
-        Endpoint - PATCH /api/notifications/read
+        Endpoint - PATCH /api/notifications/readall
         Header - 
         { 
             Authorization: Bearer <token>,
             Content-Type: application/json
-        }
-        Request - 
-        {
         }
         Response -
         {
@@ -147,9 +141,6 @@ BaseUrl - /api/notifications
         { 
             Authorization: Bearer <token>,
             Content-Type: application/json
-        }
-        Request - 
-        {
         }
         Response -
         {

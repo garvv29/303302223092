@@ -21,6 +21,6 @@ export async function Log(
         console.log(data);
         return data;
     } catch (err) {
-        console.error("Logging failed", err);
+        console.error("Logging failed", err)
     }
 }
